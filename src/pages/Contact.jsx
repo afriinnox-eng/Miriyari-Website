@@ -4,9 +4,9 @@ import usePageMeta from '../hooks/usePageMeta.js';
 import Reveal from '../components/Reveal.jsx';
 import CtaBand from '../components/CtaBand.jsx';
 import { MailIcon, PhoneIcon, PinIcon, ClockIcon, GlobeIcon } from '../components/icons.jsx';
+import { validateContact } from '../lib/contactValidation.js';
 
 const INITIAL = { name: '', email: '', company: '', role: 'Founder seeking grants', sector: '', message: '' };
-const REQUIRED = ['name', 'email', 'message'];
 
 export default function Contact() {
   usePageMeta(
@@ -25,10 +25,7 @@ export default function Contact() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const errs = {};
-    REQUIRED.forEach((k) => {
-      if (!values[k].trim()) errs[k] = true;
-    });
+    const errs = validateContact(values);
     setErrors(errs);
     if (Object.keys(errs).some((k) => errs[k])) return;
 
