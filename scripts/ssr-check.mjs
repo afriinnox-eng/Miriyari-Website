@@ -11,6 +11,8 @@ const ROUTES = [
   ['/about', 'Unlocking Africa'],
   ['/services', 'Capital programmes that meet founders'],
   ['/impact', 'Funding that lands'],
+  ['/blog', 'Monthly mission briefs from the capital desk'],
+  ['/blog/results-first-model', 'Why We Don'],
   ['/contact', 'Get in touch with our team'],
 ];
 

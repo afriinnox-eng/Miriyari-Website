@@ -4,6 +4,8 @@ import Reveal from '../components/Reveal.jsx';
 import CountUp from '../components/CountUp.jsx';
 import CtaBand from '../components/CtaBand.jsx';
 import { ArrowIcon, CheckIcon, CoinIcon, UsersIcon, TrendIcon, PinIcon } from '../components/icons.jsx';
+import BlogCard from '../components/BlogCard.jsx';
+import { posts } from '../blog/posts.js';
 
 export default function Home() {
   usePageMeta(
@@ -217,6 +219,25 @@ export default function Home() {
               <Link className="btn btn-gold btn-sm" to="/contact" style={{ alignSelf: 'flex-start', marginTop: '.6rem' }}>Apply now</Link>
             </article>
           </div>
+        </div>
+      </section>
+
+      {/* ================= LATEST FROM THE BLOG ================= */}
+      <section className="section" style={{ background: 'var(--mist)' }}>
+        <div className="container">
+          <Reveal className="section-head center">
+            <p className="eyebrow center">From the blog</p>
+            <h2>Monthly mission briefs</h2>
+            <p>What we&rsquo;re learning on the ground &mdash; mission updates, partner stories, and the mechanics of funding African growth.</p>
+          </Reveal>
+          <div className="blog-grid">
+            {posts.slice(0, 3).map((p) => (
+              <BlogCard key={p.slug} post={p} />
+            ))}
+          </div>
+          <Reveal style={{ textAlign: 'center', marginTop: '2.2rem' }}>
+            <Link className="btn btn-solid" to="/blog">View all posts</Link>
+          </Reveal>
         </div>
       </section>
 

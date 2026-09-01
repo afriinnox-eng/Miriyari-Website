@@ -10,7 +10,15 @@ converted from the original static HTML site (same design system and content).
 - `/about` — Mission, vision, approach, values, team
 - `/services` — Grant Access, Investor Connections, Direct Investments
 - `/impact` — Results, partner spotlight (BEYI Group, AFRIINNOX), sectors
+- `/blog` — Monthly mission briefs (search, category filters, featured post)
+- `/blog/:slug` — Individual post pages
 - `/contact` — Contact info + mailto contact form
+
+## Publishing monthly blog posts
+
+Add a new post object to the top of the `posts` array in `src/blog/posts.js`
+(slug, title, date, category, author, excerpt, and content blocks — see the
+instructions at the top of that file), then push to `main`.
 
 ## Local development
 
