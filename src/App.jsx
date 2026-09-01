@@ -16,10 +16,44 @@ function ScrollToTop() {
   return null;
 }
 
+/**
+ * Safety net for reveal-on-scroll (parity with the original static site's
+ * global observer): after every route change, observe any `.reveal` element
+ * that did not get an observer from the <Reveal> component and reveal it
+ * when it enters the viewport. Without this, raw `className="... reveal"`
+ * elements stay at opacity: 0 forever and render as empty/black spaces.
+ */
+function RevealAll() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+      return;
+    }
+    const els = document.querySelectorAll('.reveal:not(.in)');
+    if (els.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <>
       <ScrollToTop />
+      <RevealAll />
       <Header />
       <main>
         <Routes>
