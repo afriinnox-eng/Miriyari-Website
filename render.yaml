@@ -1,0 +1,19 @@
+# Render blueprint — Miriyari Ltd website (React SPA)
+# Enables "Blueprints" deploys from the Render dashboard, or use the
+# Render API to create a Static Site service from the GitHub repo.
+services:
+  - type: web
+    name: miriyari-website
+    runtime: static
+    repo: https://github.com/afriinnox-eng/Miriyari-Website
+    branch: main
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
